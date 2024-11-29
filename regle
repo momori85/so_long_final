@@ -1,0 +1,40 @@
+
+
+fichier a rendre : makefile, .c, .h, cartes(.ber), texture.
+
+min makefile : NAME, all, clean, fclean, re.
+
+fonction autorisées : open, close, read, write, malloc, free | afficher les erreur : perror, strerror, exit
+
+fonction autorisées : biblio math, option conpile -lm, biblio Minilibx, ft_printf, libft.
+
+le Jeu :																		status:
+
+-collecter les items puis partir(avec le chemin le plus court possible) 			KO
+-touche w, a, s, d deplacement														KO
+-pas trverser les murs																KO
+-compteur de mouvement																KO
+
+Graphic :
+
+-afficher une image dans une fenetre												KO
+-la fenetre doit rester fluide (changer de fenetre, reduire, etc ...)				KO
+-ESC doit fermer la fenetre															KO
+-la croix de la fenetre doit la fermer												KO
+-images de la minilibx est obligatoire												KO
+
+la carte :
+
+-4 elements differents : murs(1), items(C), espace vide(0), exit(E), depart(P)		KO
+-carte doit contenir 1 sortie, au moins 1 item et 1 sortie							KO
+-la carte doit etre rectangulaire													KO
+-la carte doit etre entourer de mur													KO
+-un chemin valide du depart a la sortie												KO
+-passer n'importe quelle carte en .ber												KO
+- si erreur , quitter proprement et ecrire "Error\n" suivie d'un message			KO
+
+Partie Bonus
+
+- le joueur peux perte si il est toucher part une patrouille ennemi 				KO
+- sprite animations																	KO
+- compteur afficher sur l'ecran														KO
