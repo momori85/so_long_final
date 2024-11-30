@@ -67,6 +67,7 @@ typedef struct s_map
 	t_verif 		*count;
 	t_window_game	*game;
 	t_game_img		*img;
+	t_bfs			*bfs;
 }				t_map;
 
 #endif

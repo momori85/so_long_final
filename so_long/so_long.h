@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:45:55 by amblanch          #+#    #+#             */
-/*   Updated: 2024/11/28 08:45:57 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/11/30 15:31:35 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int		ft_end_buf(t_bfs *buf);
 int		ft_start_buf(t_bfs *buf, int index);
 void	ft_init_buf(t_bfs *buf, int capacity);
 char	**ft_tabdup_(t_map *map);
+int ft_init_game_sreen(void);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:46:01 by amblanch          #+#    #+#             */
-/*   Updated: 2024/11/28 08:46:02 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/11/30 21:33:44 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(void)
 	t_map	map;
 	t_verif	count;
 
-	i = 0;
+	i = 1;
 	map.map = ft_so_long(&map);
 	if (ft_verif_map(&map, &count) == 0)
 	{
@@ -86,7 +86,14 @@ int	main(void)
 		free_map(str, &map);
 		return (0);
 	}
-	ft_graph(&map, &count);
+	while (i != 0 && i != -1 && i != 2)
+	{
+		i = ft_init_game_sreen();
+	}
+	printf("[[%d]]", i);
+	if (i == 0)
+		ft_graph(&map, &count);
+	i = 0;
 	while (i <= map.map_y)
 	{
 		ft_printf("%s\n", map.map[i]);
