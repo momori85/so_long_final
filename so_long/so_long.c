@@ -6,7 +6,7 @@
 /*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:46:01 by amblanch          #+#    #+#             */
-/*   Updated: 2024/11/30 21:33:44 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/01 10:58:33 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	main(void)
 	char **str;
 	t_map	map;
 	t_verif	count;
+	int test;
 
 	i = 1;
 	map.map = ft_so_long(&map);
@@ -89,6 +90,8 @@ int	main(void)
 	while (i != 0 && i != -1 && i != 2)
 	{
 		i = ft_init_game_sreen();
+		if (i == 1)
+			i = ft_init_settings_sreen();
 	}
 	printf("[[%d]]", i);
 	if (i == 0)
