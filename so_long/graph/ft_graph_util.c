@@ -14,21 +14,24 @@
 
 void	ft_init_img(t_map *map)
 {
-	int		taille;
+	int		len;
 
-	taille = 40;
+	len = 40;
 	map->img->img_wall = mlx_xpm_file_to_image(
-			map->game->mlx, ".img/test.xpm", &taille, &taille);
+			map->game->mlx, ".img/test.xpm", &len, &len);
 	map->img->img_path = mlx_xpm_file_to_image(
-		map->game->mlx, ".img/path.xpm", &taille, &taille);
+		map->game->mlx, ".img/path.xpm", &len, &len);
 	map->img->img_c = mlx_xpm_file_to_image(
-			map->game->mlx, ".img/c.xpm", &taille, &taille);
+			map->game->mlx, ".img/c.xpm", &len, &len);
 	map->img->img_start = mlx_xpm_file_to_image(
-			map->game->mlx, ".img/d.xpm", &taille, &taille);
+			map->game->mlx, ".img/d.xpm", &len, &len);
 	map->img->img_exit = mlx_xpm_file_to_image(
-			map->game->mlx, ".img/exit.xpm", &taille, &taille);
+			map->game->mlx, ".img/exit.xpm", &len, &len);
 	map->img->img_player = mlx_xpm_file_to_image(
-			map->game->mlx, ".img/player.xpm", &taille, &taille);
+			map->game->mlx, ".img/player.xpm", &len, &len);
+	map->img->img_left = mlx_xpm_file_to_image(map->game->mlx, ".img/left_game.xpm", &len, &len);
+	map->img->img_settings = mlx_xpm_file_to_image(map->game->mlx, ".img/settings_screen.xpm", &len, &len);
+	map->img->img_game = mlx_xpm_file_to_image(map->game->mlx, ".img/start_screen.xpm", &len, &len);
 }
 
 void	ft_clear_graph(t_map *map)

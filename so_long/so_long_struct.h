@@ -52,6 +52,13 @@ typedef struct s_game_img
 	void	*img_c;
 	void	*img_exit;
 	void	*img_start;
+	void	*img_game;
+    void	*img_settings;
+    void	*img_left;
+    void	*img_480;
+    void	*img_720;
+    void	*img_1080;
+    void	*img_exit_settings;
 }				t_game_img;
 
 typedef struct s_map
@@ -64,6 +71,8 @@ typedef struct s_map
 	int				end_y;
 	int				map_y;
 	int				path;
+	int				i;
+	int 			game_status;
 	t_verif 		*count;
 	t_window_game	*game;
 	t_game_img		*img;

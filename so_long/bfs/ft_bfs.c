@@ -22,7 +22,7 @@ int	ft_verif_bfs(char **str, int next_x, int next_y)
 	return (str[next_y][next_x] != '1' && str[next_y][next_x] != '*');
 }
 
-void	ft_bfs_move(t_bfs *buf, t_map *map, t_verif *count, char **str)
+void	ft_bfs_move(t_bfs *buf, t_map *map, char **str)
 {
 	int			move;
 	const int	direction[4][2] = {
@@ -49,7 +49,6 @@ void	ft_bfs_move(t_bfs *buf, t_map *map, t_verif *count, char **str)
 
 int	ft_bfs(t_map *map, t_verif *count, char **str)
 {
-	int		next;
 	t_bfs	buf;
 
 	buf.count_bfs_c = 0;
@@ -67,7 +66,7 @@ int	ft_bfs(t_map *map, t_verif *count, char **str)
 			free(buf.tab);
 			return (1);
 		}
-		ft_bfs_move(&buf, map, count, str);
+		ft_bfs_move(&buf, map, str);
 	}
 	free(buf.tab);
 	return (0);

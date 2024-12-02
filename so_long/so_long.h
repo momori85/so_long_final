@@ -30,7 +30,5 @@ int		ft_end_buf(t_bfs *buf);
 int		ft_start_buf(t_bfs *buf, int index);
 void	ft_init_buf(t_bfs *buf, int capacity);
 char	**ft_tabdup_(t_map *map);
-int ft_init_game_sreen(void);
-int ft_init_settings_sreen(void);
 
 #endif

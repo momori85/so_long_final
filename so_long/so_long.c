@@ -69,7 +69,6 @@ int	main(void)
 	char **str;
 	t_map	map;
 	t_verif	count;
-	int test;
 
 	i = 1;
 	map.map = ft_so_long(&map);
@@ -87,15 +86,15 @@ int	main(void)
 		free_map(str, &map);
 		return (0);
 	}
-	while (i != 0 && i != -1 && i != 2)
+	//i = ft_init_game_sreen();
+	/*while (i != 0 && i != -1 && i != 2)
 	{
 		i = ft_init_game_sreen();
 		if (i == 1)
 			i = ft_init_settings_sreen();
-	}
+	}*/
 	printf("[[%d]]", i);
-	if (i == 0)
-		ft_graph(&map, &count);
+	ft_graph(&map);
 	i = 0;
 	while (i <= map.map_y)
 	{

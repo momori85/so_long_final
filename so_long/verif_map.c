@@ -78,7 +78,6 @@ int	ft_map_max(t_map *map)
 
 int	ft_verif_map(t_map *map, t_verif *vars)
 {
-	int		max;
 	int		y;
 	int		x;
 

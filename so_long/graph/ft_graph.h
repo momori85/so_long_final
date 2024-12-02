@@ -15,8 +15,10 @@
 
 # include "../so_long.h"
 
-int	ft_graph(t_map *map, t_verif *count);
+int	ft_graph(t_map *map);
 void	ft_init_img(t_map *map);
 void	ft_clear_graph(t_map *map);
+int ft_init_settings_sreen(void);
+int ft_init_game_sreen(t_map *map);
 
 #endif
