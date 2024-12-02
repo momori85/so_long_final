@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_graph_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:19:07 by amblanch          #+#    #+#             */
-/*   Updated: 2024/11/11 11:19:09 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/12/02 20:36:24 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	ft_init_img(t_map *map)
 	map->img->img_left = mlx_xpm_file_to_image(map->game->mlx, ".img/left_game.xpm", &len, &len);
 	map->img->img_settings = mlx_xpm_file_to_image(map->game->mlx, ".img/settings_screen.xpm", &len, &len);
 	map->img->img_game = mlx_xpm_file_to_image(map->game->mlx, ".img/start_screen.xpm", &len, &len);
+	map->img->img_480 = mlx_xpm_file_to_image(map->game->mlx, ".img/480p.xpm", &len, &len);
+	map->img->img_720 = mlx_xpm_file_to_image(map->game->mlx, ".img/720p.xpm", &len, &len);
+	map->img->img_1080 = mlx_xpm_file_to_image(map->game->mlx, ".img/1080p.xpm", &len, &len);
+	map->img->img_exit_settings = mlx_xpm_file_to_image(map->game->mlx, ".img/settings_exit.xpm", &len, &len);
 }
 
 void	ft_clear_graph(t_map *map)

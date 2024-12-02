@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_graph.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:55:15 by amblanch          #+#    #+#             */
-/*   Updated: 2024/11/06 14:55:17 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:33:15 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	ft_create_map(t_map *map)
 	int tmp;
 	int tmp_x;
 
-	x = 990 / 2 - 20 - (40 * map->count->vision);
-	y = 990 / 2 - 20 - (40 * map->count->vision);
+	x = map->screen_x / 2 - 20 - (40 * map->count->vision);
+	y = map->screen_y / 2 - 20 - (40 * map->count->vision);
 	len_max_x = map->count->vision + map->start_x;
 	len_max_y = map->count->vision + map->start_y;
 	
@@ -118,7 +118,7 @@ void	ft_move_player(int keycode, t_map *map)
 int	move(int keycode, t_map *map)
 {
 	int len;
-	
+
 	len = 40;
 	printf("Keycode: %d\n", keycode);
 	if (map->game_status == 0)
@@ -157,19 +157,22 @@ int	move(int keycode, t_map *map)
 	       if (map->i == 1)
 	       {
 	       		mlx_clear_window(map->game->mlx, map->game->window);
+				map->img->img_left = mlx_xpm_file_to_image(map->game->mlx, ".img/left_game.xpm", &len, &len);
+				map->img->img_settings = mlx_xpm_file_to_image(map->game->mlx, ".img/settings_screen.xpm", &len, &len);
+				map->img->img_game = mlx_xpm_file_to_image(map->game->mlx, ".img/start_screen.xpm", &len, &len);
+				map->img->img_480 = mlx_xpm_file_to_image(map->game->mlx, ".img/480p.xpm", &len, &len);
+				map->img->img_720 = mlx_xpm_file_to_image(map->game->mlx, ".img/720p.xpm", &len, &len);
+				map->img->img_1080 = mlx_xpm_file_to_image(map->game->mlx, ".img/1080p.xpm", &len, &len);
+				map->img->img_exit_settings = mlx_xpm_file_to_image(map->game->mlx, ".img/settings_exit.xpm", &len, &len);
+				mlx_destroy_window(map->game->mlx, map->game->window);
+				map->game->window = mlx_new_window(map->game->mlx, map->screen_x, map->screen_y, "adventure_time");
+				mlx_key_hook(map->game->window, move, map);
 	       		ft_create_map(map);
 	       }
 	       if (map->i == 2)
 	       {
 	       		mlx_clear_window(map->game->mlx, map->game->window);
 	       		map->i = 0;
-	       		map->img->img_480 = mlx_xpm_file_to_image(map->game->mlx, ".img/480p.xpm", &len, &len);
-				map->img->img_720 = mlx_xpm_file_to_image(map->game->mlx, ".img/720p.xpm", &len, &len);
-				map->img->img_1080 = mlx_xpm_file_to_image(map->game->mlx, ".img/1080p.xpm", &len, &len);
-				map->img->img_exit_settings = mlx_xpm_file_to_image(map->game->mlx, ".img/settings_exit.xpm", &len, &len);
-				mlx_destroy_image(map->game->mlx, map->img->img_game);
-    			mlx_destroy_image(map->game->mlx, map->img->img_settings);
-    			mlx_destroy_image(map->game->mlx, map->img->img_left);
     			mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_1080, 0, 0);
 	       }
 	       if (map->i == 3)
@@ -178,40 +181,57 @@ int	move(int keycode, t_map *map)
 	}
 	if (map->game_status == 2)
 	{
-		if (keycode == 119 && map->i > 0)
+		if (keycode == 119 && map->i > 1)
     	{
         	map->i--;
         	mlx_clear_window(map->game->mlx, map->game->window);
-        	if (map->i == 0)
-        	    mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_1080, 0, 0);
         	if (map->i == 1)
-        	    mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_720, 0, 0);
+        	    mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_1080, 0, 0);
         	if (map->i == 2)
-        	    mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_480, 0, 0);
+        	    mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_720, 0, 0);
         	if (map->i == 3)
+        	    mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_480, 0, 0);
+        	if (map->i == 4)
         	    mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_exit_settings, 0, 0);
     	}
-    	if (keycode == 115 && map->i < 3)
+    	if (keycode == 115 && map->i < 4)
     	{
     	    map->i++;
     	    mlx_clear_window(map->game->mlx, map->game->window);
-    	    if (map->i == 0)
-    	        mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_1080, 0, 0);
     	    if (map->i == 1)
-    	        mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_720, 0, 0);
+    	        mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_1080, 0, 0);
     	    if (map->i == 2)
-    	        mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_480, 0, 0);
+    	        mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_720, 0, 0);
     	    if (map->i == 3)
+    	        mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_480, 0, 0);
+    	    if (map->i == 4)
     	        mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_exit_settings, 0, 0);
     	}
-    	if (keycode == 65307)
+    	if (keycode == 65307 && map->i != 0)
     	{
     	    map->i = -1;
     	    mlx_loop_end(map->game->mlx);
     	}
-    	if (keycode == 65293)
+    	if (keycode == 65293 && map->i != 0)
     	{
-    	    mlx_loop_end(map->game->mlx);
+    	  	map->game_status = 0;
+		    mlx_clear_window(map->game->mlx, map->game->window);
+			if (map->i == 1)
+			{
+				map->screen_x = 1980;
+				map->screen_y = 1080;
+			}
+			if (map->i == 2)
+			{
+				map->screen_x = 1280;
+				map->screen_y = 720;
+			}
+			if (map->i == 3)
+			{
+				map->screen_x = 640;
+				map->screen_y = 480;
+			}
+			mlx_put_image_to_window(map->game->mlx, map->game->window, map->img->img_game, 0, 0);
     	}
 	}
 	if (map->game_status == 1)
@@ -245,6 +265,8 @@ int	ft_graph(t_map *map)
 	
 	map->i = 0;
 	map->game_status = 0;
+	map->screen_x = 1980;
+	map->screen_y = 1080;
 	map->img = (t_game_img *)ft_calloc(1, sizeof(t_game_img));
 	if (!map->img)
     	return (0);
@@ -274,7 +296,7 @@ int	ft_graph(t_map *map)
     mlx_destroy_image(map->game->mlx, map->img->img_480);
     mlx_destroy_image(map->game->mlx, map->img->img_720);
     mlx_destroy_image(map->game->mlx, map->img->img_1080);
-    mlx_destroy_image(map->game->mlx, map->img->img_exit);
+    mlx_destroy_image(map->game->mlx, map->img->img_exit_settings);
 	ft_clear_graph(map);
 	free(map->img);
 	free(map->count);

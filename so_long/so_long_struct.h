@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_struct.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:34:53 by amblanch          #+#    #+#             */
-/*   Updated: 2024/11/28 12:34:54 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:06:05 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct s_map
 	int				path;
 	int				i;
 	int 			game_status;
+	int				screen_x;
+	int				screen_y;
 	t_verif 		*count;
 	t_window_game	*game;
 	t_game_img		*img;
