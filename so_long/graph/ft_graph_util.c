@@ -12,41 +12,72 @@
 
 #include "ft_graph.h"
 
-void	ft_init_img(t_map *map)
+int	ft_putnbr_base_ten(t_map *map, char *base, unsigned long result)
 {
-	int		len;
-
-	len = 40;
-	map->img->img_wall = mlx_xpm_file_to_image(
-			map->game->mlx, ".img/test.xpm", &len, &len);
-	map->img->img_path = mlx_xpm_file_to_image(
-		map->game->mlx, ".img/path.xpm", &len, &len);
-	map->img->img_c = mlx_xpm_file_to_image(
-			map->game->mlx, ".img/c.xpm", &len, &len);
-	map->img->img_start = mlx_xpm_file_to_image(
-			map->game->mlx, ".img/d.xpm", &len, &len);
-	map->img->img_exit = mlx_xpm_file_to_image(
-			map->game->mlx, ".img/exit.xpm", &len, &len);
-	map->img->img_player = mlx_xpm_file_to_image(
-			map->game->mlx, ".img/player.xpm", &len, &len);
-	map->img->img_left = mlx_xpm_file_to_image(map->game->mlx, ".img/left_game.xpm", &len, &len);
-	map->img->img_settings = mlx_xpm_file_to_image(map->game->mlx, ".img/settings_screen.xpm", &len, &len);
-	map->img->img_game = mlx_xpm_file_to_image(map->game->mlx, ".img/start_screen.xpm", &len, &len);
-	map->img->img_480 = mlx_xpm_file_to_image(map->game->mlx, ".img/480p.xpm", &len, &len);
-	map->img->img_720 = mlx_xpm_file_to_image(map->game->mlx, ".img/720p.xpm", &len, &len);
-	map->img->img_1080 = mlx_xpm_file_to_image(map->game->mlx, ".img/1080p.xpm", &len, &len);
-	map->img->img_exit_settings = mlx_xpm_file_to_image(map->game->mlx, ".img/settings_exit.xpm", &len, &len);
+	while (map->adress >= 10)
+	{
+		map->adress = map->adress / 10;
+		result = result * 10 + base[map->adress % 10];
+	}
+	return (result);
 }
 
-void	ft_clear_graph(t_map *map)
+t_map	*simple_hash(t_map *map)
 {
-	mlx_destroy_image(map->game->mlx, map->img->img_player);
-	mlx_destroy_image(map->game->mlx, map->img->img_path);
-	mlx_destroy_image(map->game->mlx, map->img->img_c);
-	mlx_destroy_image(map->game->mlx, map->img->img_wall);
-	mlx_destroy_image(map->game->mlx, map->img->img_start);
-	mlx_destroy_image(map->game->mlx, map->img->img_exit);
-	mlx_clear_window(map->game->mlx, map->game->window);
-	mlx_destroy_window(map->game->mlx, map->game->window);
-	mlx_destroy_display(map->game->mlx);
+	map->adress ^= (map->adress << 13);
+	map->adress ^= (map->adress >> 17);
+	map->adress ^= (map->adress << 5);
+	return (map);
+}
+
+void	ft_random(t_map *map)
+{
+	void	*adress;
+
+	adress = malloc(1);
+	if (adress == NULL)
+		return ;
+	map->adress = (unsigned long)adress;
+	map->adress = ft_putnbr_base_ten(simple_hash(map), "0123456789abcdef", 0);
+	free(adress);
+}
+
+void	ft_fill(t_map *map, int x, int y)
+{
+	if (x > map->len || x < 0 || y > map->map_y || y < 0
+		|| map->map[y][x] == 'W' || map->map[y][x] == '0'
+					|| map->map[y][x] == 'C' || map->map[y][x] == 'E'
+							|| map->map[y][x] == 'P')
+		return ;
+	else
+		map->map[y][x] = 'W';
+	ft_fill(map, x + 1, y);
+	ft_fill(map, x - 1, y);
+	ft_fill(map, x, y + 1);
+	ft_fill(map, x, y - 1);
+	return ;
+}
+
+int	ft_game_malloc_list(t_map *map)
+{
+	map->img = (t_game_img *)ft_calloc(1, sizeof(t_game_img));
+	if (!map->img)
+		return (0);
+	map->bot = (t_bot *)ft_calloc(1, sizeof(t_bot));
+	if (!map->bot)
+		return (0);
+	map->img_wall = (t_img_wall *)ft_calloc(1, sizeof(t_img_wall));
+	if (!map->img_wall)
+		return (0);
+	map->game = (t_window_game *)ft_calloc(1, sizeof(t_window_game));
+	if (!map->game)
+		return (0);
+	map->bfs = (t_bfs *)ft_calloc(1, sizeof(t_bfs));
+	if (!map->bfs)
+		return (0);
+	map->count = (t_verif *)ft_calloc(1, sizeof(t_verif));
+	if (!map->count)
+		return (0);
+	memset(map->game, 0, sizeof(t_window_game));
+	return (1);
 }

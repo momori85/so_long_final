@@ -64,9 +64,9 @@ int	ft_map_max(t_map *map)
 	max = 0;
 	while (map->map[0][max])
 	{
-		if (map->map[0][max] == '\n')
+		if (map->map[0][max + 1] == '\n')
 		{
-			map->map[0][max] = '\0';
+			map->map[0][max + 1] = '\0';
 			return (max);
 		}
 		if (map->map[0][max] != '1')
@@ -84,7 +84,7 @@ int	ft_verif_map(t_map *map, t_verif *vars)
 	vars->count_p = 0;
 	vars->count_e = 0;
 	vars->count_c = 0;
-	map->len = ft_map_max(map) - 1;
+	map->len = ft_map_max(map);
 	if (map->len == 0)
 		return (0);
 	y = ft_verif_map_p2(map, vars, map->len);

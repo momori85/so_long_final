@@ -15,6 +15,16 @@
 
 #include "so_long.h"
 
+typedef struct s_bot
+{
+	int bot1_x;
+	int bot1_y;
+	int bot2_x;
+	int bot2_y;
+	int bot3_x;
+	int bot3_y;
+}				t_bot;
+
 typedef struct s_verif
 {
 	int	count_p;
@@ -59,7 +69,31 @@ typedef struct s_game_img
     void	*img_720;
     void	*img_1080;
     void	*img_exit_settings;
+    void	*bot;
 }				t_game_img;
+
+typedef struct s_img_wall
+{
+	void	*front_down;
+	void	*left;
+	void	*left_and_right;
+	void	*left_and_down;
+	void	*left_down;
+	void	*midle;
+	void	*midle_down;
+	void	*right;
+	void	*right_down;
+	void	*solo;
+	void	*solo_down;
+	void	*solo_top;
+	void	*top_left;
+	void	*top_midle;
+	void	*top_right;
+	void	*top_and_down;
+	void	*solo_left;
+	void	*solo_right;
+	void	*water;
+}			t_img_wall;
 
 typedef struct s_map
 {
@@ -75,10 +109,15 @@ typedef struct s_map
 	int 			game_status;
 	int				screen_x;
 	int				screen_y;
+	char			lim;
+	char			ch;
+	unsigned long	adress;
 	t_verif 		*count;
 	t_window_game	*game;
 	t_game_img		*img;
 	t_bfs			*bfs;
+	t_img_wall		*img_wall;
+	t_bot			*bot;
 }				t_map;
 
 #endif
