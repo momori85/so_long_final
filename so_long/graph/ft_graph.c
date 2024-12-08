@@ -6,7 +6,7 @@
 /*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:55:15 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/02 21:33:15 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/07 15:04:54 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	ft_move_player(int keycode, t_map *map)
 		map->map[map->start_y][map->start_x] = 'P';
 		map->path++;
 		mlx_clear_window(map->game->mlx, map->game->window);
+		mlx_put_image_to_window(map->game->mlx, map->game->window,
+			map->img->fog, 0, 0);
 		ft_create_map_init(map, 0, 0);
 	}
 	if (keycode == 119 && (map->map[map->start_y - 1][map->start_x] != '1'
@@ -52,6 +54,8 @@ void	ft_move_player(int keycode, t_map *map)
 		map->map[map->start_y][map->start_x] = 'P';
 		map->path++;
 		mlx_clear_window(map->game->mlx, map->game->window);
+		mlx_put_image_to_window(map->game->mlx, map->game->window,
+			map->img->fog, 0, 0);
 		ft_create_map_init(map, 0, 0);
 	}
 	if (keycode == 97 && map->map[map->start_y][map->start_x - 1] != '1'
@@ -67,15 +71,14 @@ void	ft_move_player(int keycode, t_map *map)
 		map->map[map->start_y][map->start_x] = 'P';
 		map->path++;
 		mlx_clear_window(map->game->mlx, map->game->window);
+		mlx_put_image_to_window(map->game->mlx, map->game->window,
+			map->img->fog, 0, 0);
 		ft_create_map_init(map, 0, 0);
 	}
 }
 
 int	move(int keycode, t_map *map)
 {
-	int	len;
-
-	len = 40;
 	printf("Keycode: %d\n", keycode);
 	ft_game_menu(map, keycode);
 	ft_game_status_settings(map, keycode);
@@ -96,6 +99,8 @@ int	move(int keycode, t_map *map)
 			map->map[map->start_y][map->start_x] = 'P';
 			map->path++;
 			mlx_clear_window(map->game->mlx, map->game->window);
+			mlx_put_image_to_window(map->game->mlx, map->game->window,
+				map->img->fog, 0, 0);
 			ft_create_map_init(map, 0, 0);
 		}
 		if (map->start_y == map->bfs->next_y && map->start_x == map->bfs->next_x

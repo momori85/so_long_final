@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_game_img_init.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:41:51 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/06 15:41:52 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:58:43 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	ft_init_img(t_map *map)
 			map->game->mlx, ".img/player.xpm", &len, &len);
 	map->img->bot = mlx_xpm_file_to_image(
 			map->game->mlx, ".img/goblin.xpm", &len, &len);
+	map->img->fog = mlx_xpm_file_to_image(
+			map->game->mlx, ".img/fog.xpm", &len, &len);
 	ft_init_img_path(map, len);
 	ft_init_wall_one(map, len);
 	ft_init_wall(map, len);

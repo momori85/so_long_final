@@ -6,23 +6,23 @@
 /*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:34:53 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/02 21:06:05 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/07 23:20:17 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_STRUCT_H
 # define SO_LONG_STRUCT_H
 
-#include "so_long.h"
+# include "so_long.h"
 
 typedef struct s_bot
 {
-	int bot1_x;
-	int bot1_y;
-	int bot2_x;
-	int bot2_y;
-	int bot3_x;
-	int bot3_y;
+	int	bot1_x;
+	int	bot1_y;
+	int	bot2_x;
+	int	bot2_y;
+	int	bot3_x;
+	int	bot3_y;
 }				t_bot;
 
 typedef struct s_verif
@@ -30,7 +30,7 @@ typedef struct s_verif
 	int	count_p;
 	int	count_e;
 	int	count_c;
-	int vision;
+	int	vision;
 }				t_verif;
 
 typedef struct s_bfs
@@ -63,13 +63,14 @@ typedef struct s_game_img
 	void	*img_exit;
 	void	*img_start;
 	void	*img_game;
-    void	*img_settings;
-    void	*img_left;
-    void	*img_480;
-    void	*img_720;
-    void	*img_1080;
-    void	*img_exit_settings;
-    void	*bot;
+	void	*img_settings;
+	void	*img_left;
+	void	*img_480;
+	void	*img_720;
+	void	*img_1080;
+	void	*img_exit_settings;
+	void	*fog;
+	void	*bot;
 }				t_game_img;
 
 typedef struct s_img_wall
@@ -106,13 +107,13 @@ typedef struct s_map
 	int				map_y;
 	int				path;
 	int				i;
-	int 			game_status;
+	int				game_status;
 	int				screen_x;
 	int				screen_y;
 	char			lim;
 	char			ch;
 	unsigned long	adress;
-	t_verif 		*count;
+	t_verif			*count;
 	t_window_game	*game;
 	t_game_img		*img;
 	t_bfs			*bfs;

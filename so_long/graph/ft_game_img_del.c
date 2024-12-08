@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_game_img_del.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:41:59 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/06 15:42:00 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:59:56 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	ft_clear_screen(t_map *map)
 	mlx_destroy_image(map->game->mlx, map->img->img_c);
 	mlx_destroy_image(map->game->mlx, map->img->img_exit);
 	mlx_destroy_image(map->game->mlx, map->img->bot);
+	mlx_destroy_image(map->game->mlx, map->img->fog);
 }
 
 void	ft_clear_graph(t_map *map)
