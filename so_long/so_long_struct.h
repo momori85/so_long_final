@@ -71,6 +71,17 @@ typedef struct s_game_img
 	void	*img_exit_settings;
 	void	*fog;
 	void	*bot;
+	void	*fog_two;
+	void	*fog_tree;
+	void	*died;
+	void	*gold_count;
+	void	*img_mini_path;
+	void	*img_mini_bot;
+	void	*img_mini_wall;
+	void	*img_mini_player;
+	void	*img_save;
+	void	*img_save_exit;
+	void	*img_resume;
 }				t_game_img;
 
 typedef struct s_img_wall
@@ -93,8 +104,26 @@ typedef struct s_img_wall
 	void	*top_and_down;
 	void	*solo_left;
 	void	*solo_right;
-	void	*water;
+	void	*water_one;
+	void	*water_two;
+	void	*water_tree;
 }			t_img_wall;
+
+typedef struct s_img_player
+{
+	void	*player_frame_1;
+	void	*player_frame_2;
+	void	*player_frame_3;
+	void	*player_frame_4;
+	void	*player_frame_5;
+	void	*player_frame_6;
+	void	*player_frame_7;
+	void	*player_frame_8;
+	void	*player_frame_9;
+	void	*player_frame_10;
+	void	*player_frame_11;
+	void	*player_frame_12;
+}				t_img_player;
 
 typedef struct s_map
 {
@@ -110,15 +139,20 @@ typedef struct s_map
 	int				game_status;
 	int				screen_x;
 	int				screen_y;
-	char			lim;
-	char			ch;
+	int				count_c;
 	unsigned long	adress;
+	int				frame;
+	int				frame_1;
+	char			*count_path;
+	char			**mini_map;
+	int				fd;
 	t_verif			*count;
 	t_window_game	*game;
 	t_game_img		*img;
 	t_bfs			*bfs;
 	t_img_wall		*img_wall;
 	t_bot			*bot;
+	t_img_player	*player;
 }				t_map;
 
 #endif

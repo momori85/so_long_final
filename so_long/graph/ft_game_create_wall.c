@@ -12,7 +12,7 @@
 
 #include "ft_graph.h"
 
-void	ft_create_map_wall_two(t_map *map, int result, int x, int y)
+static void	ft_create_map_wall_two(t_map *map, int result, int x, int y)
 {
 	if (result == 0)
 		mlx_put_image_to_window(map->game->mlx, map->game->window,
@@ -40,7 +40,7 @@ void	ft_create_map_wall_two(t_map *map, int result, int x, int y)
 			map->img_wall->solo_top, x, y);
 }
 
-void	ft_create_map_wall_one(t_map *map, int result, int x, int y)
+static void	ft_create_map_wall_one(t_map *map, int result, int x, int y)
 {
 	if (result == 8)
 		mlx_put_image_to_window(map->game->mlx, map->game->window,

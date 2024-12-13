@@ -12,13 +12,13 @@
 
 #include "so_long.h"
 
-char	**ft_tabdup(t_map *map)
+static char	**ft_tabdup(t_map *map)
 {
 	int		i;
 	char	**str;
 
 	i = 0;
-	str = malloc(sizeof (char *) * (map->map_y + 1));
+	str = malloc(sizeof (char *) * (map->map_y + 2));
 	if (str == NULL)
 		return (NULL);
 	while (map->map[i])
@@ -33,10 +33,11 @@ char	**ft_tabdup(t_map *map)
 		}
 		i++;
 	}
+	str[map->map_y + 1] = 0;
 	return (str);
 }
 
-char	**ft_so_long(t_map *map, char *name)
+static char	**ft_so_long(t_map *map, char *name)
 {
 	int		fd;
 	int		i;
@@ -55,17 +56,16 @@ char	**ft_so_long(t_map *map, char *name)
 	}
 	close(fd);
 	free(str);
+	if (i == 0)
+		return (NULL);
 	map->map = malloc(sizeof(char *) * (i + 1));
-	i = 0;
 	fd = open(name, O_RDONLY);
-	map->map[i] = get_next_line(fd);
-	while (map->map[i++] != NULL)
-		map->map[i] = get_next_line(fd);
+	map->map = ft_so_long_map_create(map, fd);
 	close(fd);
 	return (map->map);
 }
 
-int	ft_verif_name(int argc, char **argv)
+static int	ft_verif_name(int argc, char **argv)
 {
 	int		i;
 	int		j;
@@ -87,14 +87,42 @@ int	ft_verif_name(int argc, char **argv)
 	return (1);
 }
 
-void	ft_error_exit(char **map, char **str, t_map *data_map, char *error)
+static void	ft_error_exit(char **map, char **str, t_map *data_map, char *error)
 {
-	if (!map)
+	if (map)
 		free_map(data_map->map, data_map);
-	if (!str)
+	if (str)
 		free_map(str, data_map);
-	ft_printf("%s\n", error);
+	ft_printf("%s", error);
 	exit(EXIT_FAILURE);
+}
+
+void	ft_create_mini_map_empty(t_map *map)
+{
+	int	i;
+	int j;
+	
+	i = 0;
+	j = 0;
+	while (map->mini_map[i])
+	{
+		while (map->mini_map[i][j])
+		{
+			map->mini_map[i][j] = '*';
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
+int	ft_verif_save(t_map *map)
+{
+	map->map = ft_so_long(map, "save.txt");
+	if (map->map == 0)
+		return (0);
+	return (1);
+	
 }
 
 int	main(int argc, char **argv)
@@ -103,17 +131,29 @@ int	main(int argc, char **argv)
 	t_map	map;
 	t_verif	count;
 
-	if (ft_verif_name(argc, argv) != 1)
-		return (0);
-	map.map = ft_so_long(&map, argv[1]);
-	if (map.map == 0)
-		return (ft_printf("error, map name not good\n"));
-	if (ft_verif_map(&map, &count) == 0)
-		ft_error_exit(map.map, NULL, &map, "error, map invalid\n");
-	str = ft_tabdup(&map);
-	if (ft_init_bfs(&map, &count, str) == 0 || str == NULL)
-		ft_error_exit(map.map, str, &map, "error, no path\n");
+	str = NULL;
+	if (ft_verif_save(&map) == 1)
+	{
+		ft_printf("load, save");
+	}
+	else
+	{
+		if (ft_verif_name(argc, argv) != 1)
+			return (0);
+		map.map = ft_so_long(&map, argv[1]);
+		if (map.map == 0)
+			return (ft_printf("error, map name not good\n"));
+		if (ft_verif_map(&map, &count) == 0)
+			ft_error_exit(map.map, NULL, &map, "error, map invalid\n");
+		str = ft_tabdup(&map);
+		if (ft_init_bfs(&map, &count, str) == 0 || str == NULL)
+			ft_error_exit(map.map, str, &map, "error, no path\n");
+	}
+	map.mini_map = ft_tabdup(&map);
+	ft_create_mini_map_empty(&map);
 	ft_graph(&map);
 	free_map(map.map, &map);
 	free_map(str, &map);
+	free_map(map.mini_map, &map);
+	ft_clear_graph(&map);
 }

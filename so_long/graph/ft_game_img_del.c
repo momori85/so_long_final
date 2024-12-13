@@ -12,7 +12,7 @@
 
 #include "ft_graph.h"
 
-void	ft_del_wall(t_map *map)
+static void	ft_del_wall(t_map *map)
 {
 	mlx_destroy_image(map->game->mlx, map->img_wall->front_down);
 	mlx_destroy_image(map->game->mlx, map->img_wall->left);
@@ -31,10 +31,12 @@ void	ft_del_wall(t_map *map)
 	mlx_destroy_image(map->game->mlx, map->img_wall->top_and_down);
 	mlx_destroy_image(map->game->mlx, map->img_wall->solo_right);
 	mlx_destroy_image(map->game->mlx, map->img_wall->solo_left);
-	mlx_destroy_image(map->game->mlx, map->img_wall->water);
+	mlx_destroy_image(map->game->mlx, map->img_wall->water_one);
+	mlx_destroy_image(map->game->mlx, map->img_wall->water_two);
+	mlx_destroy_image(map->game->mlx, map->img_wall->water_tree);
 }
 
-void	ft_clear_screen(t_map *map)
+static void	ft_clear_screen(t_map *map)
 {
 	mlx_destroy_image(map->game->mlx, map->img->img_game);
 	mlx_destroy_image(map->game->mlx, map->img->img_settings);
@@ -49,12 +51,40 @@ void	ft_clear_screen(t_map *map)
 	mlx_destroy_image(map->game->mlx, map->img->img_exit);
 	mlx_destroy_image(map->game->mlx, map->img->bot);
 	mlx_destroy_image(map->game->mlx, map->img->fog);
+	mlx_destroy_image(map->game->mlx, map->img->fog_two);
+	mlx_destroy_image(map->game->mlx, map->img->fog_tree);
+	mlx_destroy_image(map->game->mlx, map->img->died);
+	mlx_destroy_image(map->game->mlx, map->img->gold_count);
+}
+
+static void	ft_clear_player(t_map *map)
+{
+	mlx_destroy_image(map->game->mlx, map->player->player_frame_1);
+	mlx_destroy_image(map->game->mlx, map->player->player_frame_2);
+	mlx_destroy_image(map->game->mlx, map->player->player_frame_3);
+	mlx_destroy_image(map->game->mlx, map->player->player_frame_4);
+	mlx_destroy_image(map->game->mlx, map->player->player_frame_5);
+	mlx_destroy_image(map->game->mlx, map->player->player_frame_6);
+	mlx_destroy_image(map->game->mlx, map->player->player_frame_7);
+	mlx_destroy_image(map->game->mlx, map->player->player_frame_8);
+	mlx_destroy_image(map->game->mlx, map->player->player_frame_9);
+	mlx_destroy_image(map->game->mlx, map->player->player_frame_10);
+	mlx_destroy_image(map->game->mlx, map->player->player_frame_11);
+	mlx_destroy_image(map->game->mlx, map->player->player_frame_12);
+	mlx_destroy_image(map->game->mlx, map->img->img_mini_player);
+	mlx_destroy_image(map->game->mlx, map->img->img_mini_wall);
+	mlx_destroy_image(map->game->mlx, map->img->img_mini_path);
+	mlx_destroy_image(map->game->mlx, map->img->img_mini_bot);
+	mlx_destroy_image(map->game->mlx, map->img->img_save);
+	mlx_destroy_image(map->game->mlx, map->img->img_save_exit);
+	mlx_destroy_image(map->game->mlx, map->img->img_resume);
 }
 
 void	ft_clear_graph(t_map *map)
 {
 	ft_del_wall(map);
 	ft_clear_screen(map);
+	ft_clear_player(map);
 	mlx_clear_window(map->game->mlx, map->game->window);
 	mlx_destroy_window(map->game->mlx, map->game->window);
 	mlx_destroy_display(map->game->mlx);
@@ -65,4 +95,5 @@ void	ft_clear_graph(t_map *map)
 	free(map->bfs);
 	free(map->img_wall);
 	free(map->bot);
+	free(map->player);
 }

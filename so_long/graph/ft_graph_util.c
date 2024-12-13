@@ -78,6 +78,9 @@ int	ft_game_malloc_list(t_map *map)
 	map->count = (t_verif *)ft_calloc(1, sizeof(t_verif));
 	if (!map->count)
 		return (0);
+	map->player = (t_img_player *)ft_calloc(1, sizeof(t_img_player));
+	if (!map->player)
+		return (0);
 	memset(map->game, 0, sizeof(t_window_game));
 	return (1);
 }

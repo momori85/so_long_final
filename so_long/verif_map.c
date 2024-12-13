@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	ft_verif_c_p_e(t_map *map, t_verif *vars, int x, int y)
+static void	ft_verif_c_p_e(t_map *map, t_verif *vars, int x, int y)
 {
 	if (map->map[y][x] == 'E')
 	{
@@ -30,7 +30,7 @@ void	ft_verif_c_p_e(t_map *map, t_verif *vars, int x, int y)
 		vars->count_c++;
 }
 
-int	ft_verif_map_p2(t_map *map, t_verif *vars, int max)
+static int	ft_verif_map_p2(t_map *map, t_verif *vars, int max)
 {
 	int	x;
 	int	y;
@@ -39,11 +39,13 @@ int	ft_verif_map_p2(t_map *map, t_verif *vars, int max)
 	x = 0;
 	while (map->map[++y])
 	{
-		map->map[y][max + 1] = '\0';
 		if (map->map[y][0] != '1')
 			return (0);
 		if (map->map[y][max] != '1')
 			return (0);
+		if (map->map[y][max + 1] != '\n')
+			return (0);
+		map->map[y][max + 1] = '\0';
 		while (map->map[y][x++])
 		{
 			ft_verif_c_p_e(map, vars, x, y);
@@ -57,17 +59,17 @@ int	ft_verif_map_p2(t_map *map, t_verif *vars, int max)
 	return (y);
 }
 
-int	ft_map_max(t_map *map)
+static int	ft_map_max(t_map *map)
 {
 	int	max;
 
 	max = 0;
 	while (map->map[0][max])
 	{
-		if (map->map[0][max + 1] == '\n')
+		if (map->map[0][max] == '\n')
 		{
-			map->map[0][max + 1] = '\0';
-			return (max);
+			map->map[0][max] = '\0';
+			return (max - 1);
 		}
 		if (map->map[0][max] != '1')
 			return (0);
@@ -95,5 +97,6 @@ int	ft_verif_map(t_map *map, t_verif *vars)
 		if (map->map[y - 1][x] != '1')
 			return (0);
 	map->map_y = y - 1;
+	map->count_c = vars->count_c;
 	return (vars->count_e == 1 && vars->count_p == 1 && vars->count_c >= 1);
 }

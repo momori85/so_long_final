@@ -12,17 +12,17 @@
 
 #include "../so_long.h"
 
-int	ft_empty(t_bfs *buf)
+static int	ft_empty(t_bfs *buf)
 {
 	return (buf->front == buf->last);
 }
 
-int	ft_verif_bfs(char **str, int next_x, int next_y, t_map *map)
+static int	ft_verif_bfs(char **str, int next_x, int next_y)
 {
-	return (str[next_y][next_x] != map->lim && str[next_y][next_x] != map->ch);
+	return (str[next_y][next_x] != '1' && str[next_y][next_x] != '*');
 }
 
-void	ft_bfs_move(t_bfs *buf, t_map *map, char **str)
+static void	ft_bfs_move(t_bfs *buf, t_map *map, char **str)
 {
 	int			move;
 	const int	direction[4][2] = {
@@ -34,20 +34,20 @@ void	ft_bfs_move(t_bfs *buf, t_map *map, char **str)
 	{
 		buf->next_x = buf->recur_x + direction[move][0];
 		buf->next_y = buf->recur_y + direction[move][1];
-		if (ft_verif_bfs(str, buf->next_x, buf->next_y, map))
+		if (ft_verif_bfs(str, buf->next_x, buf->next_y))
 		{
 			if (map->map[buf->next_y][buf->next_x] == 'C')
 				buf->count_bfs_c++;
 			if (map->map[buf->next_y][buf->next_x] == 'E')
 				buf->count_bfs_e++;
-			str[buf->next_y][buf->next_x] = map->ch;
+			str[buf->next_y][buf->next_x] = '*';
 			ft_start_buf(buf, buf->next_y * map->len + buf->next_x);
 		}
 		move++;
 	}
 }
 
-int	ft_bfs(t_map *map, t_verif *count, char **str)
+static int	ft_bfs(t_map *map, t_verif *count, char **str)
 {
 	t_bfs	buf;
 
@@ -55,7 +55,7 @@ int	ft_bfs(t_map *map, t_verif *count, char **str)
 	buf.count_bfs_e = 0;
 	ft_init_buf(&buf, map->len * map->map_y);
 	ft_start_buf(&buf, map->start_y * map->len + map->start_x);
-	str[map->start_y][map->start_x] = map->ch;
+	str[map->start_y][map->start_x] = '*';
 	while (!ft_empty(&buf))
 	{
 		buf.recur = ft_end_buf(&buf);
@@ -74,8 +74,6 @@ int	ft_bfs(t_map *map, t_verif *count, char **str)
 
 int	ft_init_bfs(t_map *map, t_verif *count, char **str)
 {
-	map->ch = '*';
-	map->lim = '1';
 	if (ft_bfs(map, count, str) == 0)
 		return (0);
 	return (1);

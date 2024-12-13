@@ -12,15 +12,28 @@
 
 #include "so_long.h"
 
-void	free_map(char **tab, t_map	*map)
+void	free_map(char **tab, t_map *map)
 {
 	int	i;
 
 	i = 0;
-	while (i <= map->map_y)
+	(void)map;
+	while (tab[i])
 	{
 		free(tab[i]);
 		i++;
 	}
-	free(tab);
+	if (tab)
+		free(tab);
+}
+
+char	**ft_so_long_map_create(t_map *map, int fd)
+{
+	int	i;
+
+	i = 0;
+	map->map[i] = get_next_line(fd);
+	while (map->map[i++] != NULL)
+		map->map[i] = get_next_line(fd);
+	return (map->map);
 }

@@ -56,7 +56,7 @@ void	ft_game_move_settings_down(t_map *map, int keycode)
 
 void	ft_resize_screen_game(t_map *map, int keycode)
 {
-	if (keycode == 65293 && map->i != 0)
+	if (keycode == 65293 && map->i > 0)
 	{
 		map->game_status = 0;
 		mlx_clear_window(map->game->mlx, map->game->window);
@@ -77,6 +77,7 @@ void	ft_resize_screen_game(t_map *map, int keycode)
 		}
 		mlx_put_image_to_window(map->game->mlx,
 			map->game->window, map->img->img_game, 0, 0);
+		map->i = 1;
 	}
 }
 
@@ -86,11 +87,10 @@ void	ft_game_status_settings(t_map *map, int keycode)
 	{
 		ft_game_move_settings_top(map, keycode);
 		ft_game_move_settings_down(map, keycode);
-		if (keycode == 65307 && map->i != 0)
-		{
-			map->i = -1;
+		if (keycode == 65307)
 			mlx_loop_end(map->game->mlx);
-		}
 		ft_resize_screen_game(map, keycode);
+		if (map->i == -1)
+			map->i = 1;
 	}
 }
