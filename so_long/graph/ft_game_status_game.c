@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_game_status_game.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 09:42:47 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/09 09:42:48 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/12/15 22:26:23 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,24 @@ void	ft_game_status_game(int keycode, t_map *map)
 		ft_game_status_game_left(keycode, map);
 		if (map->start_y == map->bfs->next_y
 			&& map->start_x == map->bfs->next_x && map->count_c <= 0)
+		{
+			if (map->save->file == 1)
+			{
+				map->fd = open("save_one.txt", O_TRUNC , 0644);
+				close(map->fd);
+			}
+			if (map->save->file == 2)
+			{
+				map->fd = open("save_two.txt", O_TRUNC , 0644);
+				close(map->fd);
+			}
+			if (map->save->file == 3)
+			{
+				map->fd = open("save_tree.txt", O_TRUNC , 0644);
+				close(map->fd);
+			}
 			mlx_loop_end(map->game->mlx);
+		}
 		if (keycode == 65307)
 		{
 			map->i = 0;

@@ -1,0 +1,21 @@
+WWWWWWWWWWWWW
+W0WW0000C000W
+W000010000000
+WW0B0110B01E0
+W001111000110
+W00110B010000
+WW01000000WW0
+W00000W000WWP
+WWWWWWWWWWWWW
+******************************
+12 : player_x
+7 : player_y
+3 : bot one x
+3 : bot one y
+6 : bot two x
+5 : bot two y
+8 : bot tree x
+3 : bot tree y
+23 : path
+3 : vision
+******************************

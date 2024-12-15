@@ -6,7 +6,7 @@
 /*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:19:07 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/02 20:36:24 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/15 19:13:25 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,9 @@ int	ft_game_malloc_list(t_map *map)
 		return (0);
 	map->player = (t_img_player *)ft_calloc(1, sizeof(t_img_player));
 	if (!map->player)
+		return (0);
+	map->save = (t_save *)ft_calloc(1, sizeof(t_save));
+	if (!map->save)
 		return (0);
 	memset(map->game, 0, sizeof(t_window_game));
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_graph.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:39:11 by amblanch          #+#    #+#             */
-/*   Updated: 2024/11/29 12:39:17 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:40:12 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ void	ft_map_seed_two(t_map *map);
 void	ft_map_seed_one(t_map *map);
 void	ft_map_seed_zero(t_map *map);
 void	ft_create_game_echap(int keycode, t_map *map);
+void    ft_game_status_save(int keycode, t_map *map);
 
 #endif

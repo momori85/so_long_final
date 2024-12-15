@@ -6,7 +6,7 @@
 /*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:55:15 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/07 15:04:54 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/15 22:26:55 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	move(int keycode, t_map *map)
 	ft_game_status_settings(map, keycode);
 	ft_game_status_game(keycode, map);
 	ft_create_game_echap(keycode, map);
+	ft_game_status_save(keycode, map);
 	return (0);
 }
 
@@ -44,6 +45,7 @@ void	ft_init_graph(t_map *map)
 	map->screen_y = 1080;
 	map->frame = 0;
 	map->frame_1 = 0;
+	map->save->file = 0;
 }
 
 int	ft_graph(t_map *map)
@@ -64,6 +66,7 @@ int	ft_graph(t_map *map)
 	map->count->vision = 1;
 	map->bfs->next_x = map->end_x;
 	map->bfs->next_y = map->end_y;
+	map->save->save_map = NULL;
 	mlx_hook(map->game->window, 17, 0, ft_close, map);
 	mlx_key_hook(map->game->window, move, map);
 	mlx_loop_hook(map->game->mlx, ft_frame, map);

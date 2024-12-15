@@ -6,7 +6,7 @@
 /*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 08:26:16 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/07 23:29:02 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/15 18:30:54 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,14 @@ static void	ft_game_menu_start_move(t_map *map)
 			map->img->img_1080, 0, 0);
 	}
 	if (map->i == 3)
+	{
+		map->game_status = 6;
+		mlx_clear_window(map->game->mlx, map->game->window);
+		map->i = -1;
+		mlx_put_image_to_window(map->game->mlx, map->game->window,
+			map->img->save_one, 0, 0);
+	}
+	if (map->i == 4)
 		mlx_loop_end(map->game->mlx);
 }
 
@@ -44,7 +52,7 @@ static void	ft_game_menu_start(t_map *map, int keycode)
 {
 	if (keycode == 65307)
 		mlx_loop_end(map->game->mlx);
-	if (keycode == 65293 && (map->i == 1 || map->i == 2 || map->i == 3))
+	if (keycode == 65293 && (map->i == 1 || map->i == 2 || map->i == 3 || map->i == 4))
 		ft_game_menu_start_move(map);
 	if (keycode == 65293 && map->i == 0)
 		map->i = 1;
@@ -52,26 +60,31 @@ static void	ft_game_menu_start(t_map *map, int keycode)
 
 static void	ft_game_menu_len(t_map *map, int keycode)
 {
-	if (keycode == 119 && map->i != 1)
+	if (keycode == 119 && map->i > 1)
 	{
-		map->i = 1;
-		mlx_clear_window(map->game->mlx, map->game->window);
-		mlx_put_image_to_window(map->game->mlx, map->game->window,
-			map->img->img_game, 0, 0);
+		map->i--;
+		if (map->i == 1)
+			mlx_put_image_to_window(map->game->mlx, map->game->window,
+				map->img->img_game, 0, 0);
+		if (map->i == 2)
+			mlx_put_image_to_window(map->game->mlx, map->game->window,
+				map->img->img_settings, 0, 0);
+		if (map->i == 3)
+			mlx_put_image_to_window(map->game->mlx, map->game->window,
+				map->img->img_game_save, 0, 0);
 	}
-	if (keycode == 115 && map->i != 2)
+	if (keycode == 115 && map->i < 4)
 	{
-		map->i = 2;
-		mlx_clear_window(map->game->mlx, map->game->window);
-		mlx_put_image_to_window(map->game->mlx, map->game->window,
-			map->img->img_settings, 0, 0);
-	}
-	if (keycode == 100 && map->i != 3)
-	{
-		map->i = 3;
-		mlx_clear_window(map->game->mlx, map->game->window);
-		mlx_put_image_to_window(map->game->mlx, map->game->window,
-			map->img->img_left, 0, 0);
+		map->i++;
+		if (map->i == 2)
+			mlx_put_image_to_window(map->game->mlx, map->game->window,
+				map->img->img_settings, 0, 0);
+		if (map->i == 3)
+			mlx_put_image_to_window(map->game->mlx, map->game->window,
+				map->img->img_game_save, 0, 0);
+		if (map->i == 4)
+			mlx_put_image_to_window(map->game->mlx, map->game->window,
+				map->img->img_left, 0, 0);
 	}
 }
 
@@ -80,13 +93,6 @@ void	ft_game_menu(t_map *map, int keycode)
 	if (map->game_status == 0)
 	{
 		ft_game_menu_len(map, keycode);
-		if (keycode == 97 && map->i != 2)
-		{
-			map->i = 2;
-			mlx_clear_window(map->game->mlx, map->game->window);
-			mlx_put_image_to_window(map->game->mlx, map->game->window,
-				map->img->img_settings, 0, 0);
-		}
 		ft_game_menu_start(map, keycode);
 	}
 }

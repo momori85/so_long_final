@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:39:01 by amblanch          #+#    #+#             */
-/*   Updated: 2024/11/28 12:39:05 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:17:59 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	free_map(char **tab, t_map *map)
 		free(tab);
 }
 
-char	**ft_so_long_map_create(t_map *map, int fd)
+char	**ft_so_long_map_create(char **tmp, int fd)
 {
 	int	i;
 
 	i = 0;
-	map->map[i] = get_next_line(fd);
-	while (map->map[i++] != NULL)
-		map->map[i] = get_next_line(fd);
-	return (map->map);
+	tmp[i] = get_next_line(fd);
+	while (tmp[i++] != NULL)
+		tmp[i] = get_next_line(fd);
+	return (tmp);
 }

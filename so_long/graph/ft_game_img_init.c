@@ -6,7 +6,7 @@
 /*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:41:51 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/07 14:58:43 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/15 18:29:04 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ static void	ft_init_img_screen(t_map *map, int len)
 			map->game->mlx, ".img/settings_screen.xpm", &len, &len);
 	map->img->img_game = mlx_xpm_file_to_image(
 			map->game->mlx, ".img/start_screen.xpm", &len, &len);
+	map->img->img_game_save = mlx_xpm_file_to_image(
+			map->game->mlx, ".img/save_screen.xpm", &len, &len);
 	map->img->img_480 = mlx_xpm_file_to_image(
 			map->game->mlx, ".img/480p.xpm", &len, &len);
 	map->img->img_720 = mlx_xpm_file_to_image(
@@ -78,6 +80,14 @@ static void	ft_init_img_screen(t_map *map, int len)
 			map->game->mlx, ".img/settings_exit.xpm", &len, &len);
 	map->img->img_exit = mlx_xpm_file_to_image(
 			map->game->mlx, ".img/exit.xpm", &len, &len);
+	map->img->save_one = mlx_xpm_file_to_image(
+			map->game->mlx, ".img/save_one.xpm", &len, &len);
+	map->img->save_two = mlx_xpm_file_to_image(
+			map->game->mlx, ".img/save_two.xpm", &len, &len);
+	map->img->save_tree = mlx_xpm_file_to_image(
+			map->game->mlx, ".img/save_tree.xpm", &len, &len);
+	map->img->save_exit = mlx_xpm_file_to_image(
+			map->game->mlx, ".img/save_exit.xpm", &len, &len);
 }
 
 static void	ft_init_player(t_map *map, int len)

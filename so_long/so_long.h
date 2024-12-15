@@ -6,7 +6,7 @@
 /*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:45:55 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/07 23:22:57 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/15 19:28:51 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int		ft_start_buf(t_bfs *buf, int index);
 void	ft_init_buf(t_bfs *buf, int capacity);
 char	**ft_tabdup_(t_map *map);
 int		ft_init_bfs(t_map *map, t_verif *count, char **str);
-char	**ft_so_long_map_create(t_map *map, int fd);
+char	**ft_so_long_map_create(char **tmp, int fd);
 int		ft_close(t_map *map);
+char	**ft_so_long(char *name);
 
 #endif

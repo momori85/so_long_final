@@ -6,7 +6,7 @@
 /*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:34:53 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/07 23:20:17 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/15 22:23:34 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_game_img
 	void	*img_exit;
 	void	*img_start;
 	void	*img_game;
+	void	*img_game_save;
 	void	*img_settings;
 	void	*img_left;
 	void	*img_480;
@@ -82,6 +83,10 @@ typedef struct s_game_img
 	void	*img_save;
 	void	*img_save_exit;
 	void	*img_resume;
+	void	*save_one;
+	void	*save_two;
+	void	*save_tree;
+	void	*save_exit;
 }				t_game_img;
 
 typedef struct s_img_wall
@@ -125,6 +130,15 @@ typedef struct s_img_player
 	void	*player_frame_12;
 }				t_img_player;
 
+typedef struct s_save
+{
+	char	**save;
+	char	**save_map;
+	int		len;
+	int		file;
+}			t_save;
+
+
 typedef struct s_map
 {
 	char			**map;
@@ -153,6 +167,7 @@ typedef struct s_map
 	t_img_wall		*img_wall;
 	t_bot			*bot;
 	t_img_player	*player;
+	t_save			*save;
 }				t_map;
 
 #endif

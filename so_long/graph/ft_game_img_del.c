@@ -6,7 +6,7 @@
 /*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:41:59 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/07 14:59:56 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/15 19:21:07 by amaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	ft_del_wall(t_map *map)
 static void	ft_clear_screen(t_map *map)
 {
 	mlx_destroy_image(map->game->mlx, map->img->img_game);
+	mlx_destroy_image(map->game->mlx, map->img->img_game_save);
 	mlx_destroy_image(map->game->mlx, map->img->img_settings);
 	mlx_destroy_image(map->game->mlx, map->img->img_left);
 	mlx_destroy_image(map->game->mlx, map->img->img_480);
@@ -55,6 +56,10 @@ static void	ft_clear_screen(t_map *map)
 	mlx_destroy_image(map->game->mlx, map->img->fog_tree);
 	mlx_destroy_image(map->game->mlx, map->img->died);
 	mlx_destroy_image(map->game->mlx, map->img->gold_count);
+	mlx_destroy_image(map->game->mlx, map->img->save_exit);
+	mlx_destroy_image(map->game->mlx, map->img->save_one);
+	mlx_destroy_image(map->game->mlx, map->img->save_two);
+	mlx_destroy_image(map->game->mlx, map->img->save_tree);
 }
 
 static void	ft_clear_player(t_map *map)
@@ -96,4 +101,5 @@ void	ft_clear_graph(t_map *map)
 	free(map->img_wall);
 	free(map->bot);
 	free(map->player);
+	free(map->save);
 }
