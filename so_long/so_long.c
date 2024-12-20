@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:46:01 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/15 20:06:24 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/18 13:43:58 by amblanch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,30 +91,11 @@ static int	ft_verif_name(int argc, char **argv)
 static void	ft_error_exit(char **map, char **str, t_map *data_map, char *error)
 {
 	if (map)
-		free_map(data_map->map, data_map);
+		free_map(data_map->map);
 	if (str)
-		free_map(str, data_map);
+		free_map(str);
 	ft_printf("%s", error);
 	exit(EXIT_FAILURE);
-}
-
-void	ft_create_mini_map_empty(t_map *map)
-{
-	int	i;
-	int j;
-	
-	i = 0;
-	j = 0;
-	while (map->mini_map[i])
-	{
-		while (map->mini_map[i][j])
-		{
-			map->mini_map[i][j] = '*';
-			j++;
-		}
-		j = 0;
-		i++;
-	}
 }
 
 int	main(int argc, char **argv)
@@ -128,7 +109,7 @@ int	main(int argc, char **argv)
 	map.map = ft_so_long(argv[1]);
 	if (map.map == 0)
 		return (ft_printf("error, map name not good\n"));
-	if (ft_verif_map(&map, &count) == 0)
+	if (ft_verif_map(&map, &count) == 0 || ft_verif_len(map.map) == 0)
 		ft_error_exit(map.map, NULL, &map, "error, map invalid\n");
 	str = ft_tabdup(&map);
 	if (ft_init_bfs(&map, &count, str) == 0 || str == NULL)
@@ -136,10 +117,11 @@ int	main(int argc, char **argv)
 	map.mini_map = ft_tabdup(&map);
 	ft_create_mini_map_empty(&map);
 	ft_graph(&map);
-	free_map(map.map, &map);
-	free_map(str, &map);
-	free_map(map.mini_map, &map);
+	free_map(str);
+	free_map(map.mini_map);
+	if (map.save->verif == 0)
+		free_map(map.map);
 	if (map.save->save_map)
-		free_map(map.save->save_map, &map);
+		free_map(map.save->save_map);
 	ft_clear_graph(&map);
 }

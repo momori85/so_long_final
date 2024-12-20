@@ -40,7 +40,11 @@ GRAPH = graph/ft_graph.c \
 		graph/ft_game_init_two.c \
 		graph/ft_bot_move.c \
 		graph/ft_create_game_echap.c \
-		graph/ft_game_status_save.c
+		graph/ft_game_status_save.c \
+		graph/ft_create_mini_map.c \
+		graph/ft_game_status_save_two.c \
+		graph/ft_create_game_echap_two.c \
+		graph/ft_game_img_init_two.c
 
 SRC = $(SO_LONG) $(PRINTF) $(GRAPH) $(GET_NEXT_LINE)
 
@@ -50,7 +54,7 @@ all: $(NAME)
 	
 $(NAME): $(OBJ)
 	@make -C libft/ -s
-	@make -C minilibx-linux/ -s
+	@make -C minilibx-linux/ -s -j
 	@$(CC) -o $(NAME) $(OBJ) libft/libft.a minilibx-linux/libmlx.a minilibx-linux/libmlx_Linux.a $(FULLFLAGS)
 	
 $(OBJDIR)/%.o: %.c | $(OBJDIR)

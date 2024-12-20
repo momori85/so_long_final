@@ -71,7 +71,8 @@ static void	ft_create_map(t_map *map, int x, int y)
 		while (map->end_x <= map->len && map->end_x <= len_max_x)
 		{
 			ft_create_map_condition(map, x, y);
-			map->mini_map[map->end_y][map->end_x] = map->map[map->end_y][map->end_x];
+			map->mini_map[map->end_y][map->end_x]
+				= map->map[map->end_y][map->end_x];
 			map->end_x++;
 			x += 64;
 		}
@@ -81,48 +82,6 @@ static void	ft_create_map(t_map *map, int x, int y)
 		y += 64;
 	}
 	ft_create_collectible(map, len_max_x, len_max_y);
-}
-
-void	ft_create_mini_map(t_map *map)
-{
-	int	i;
-	int j;
-	int x;
-	int	y;
-	
-	i = 0;
-	j = 0;
-	y = 300;
-	if (map->screen_x != 1980)
-		return ;
-	while (map->mini_map[i] && i <= map->map_y && y < 600)
-	{
-		x = 30;
-		while (map->mini_map[i][j] && j <= map->len && x < 600)
-		{
-			if (map->mini_map[i][j] == 'B')
-				mlx_put_image_to_window(map->game->mlx, map->game->window,
-					map->img->img_mini_bot, x, y);
-			if (map->mini_map[i][j] == '1' || map->mini_map[i][j] == 'W')
-				mlx_put_image_to_window(map->game->mlx, map->game->window,
-					map->img->img_mini_wall, x, y);
-			if (map->mini_map[i][j] == '0')
-				mlx_put_image_to_window(map->game->mlx, map->game->window,
-					map->img->img_mini_path, x, y);
-			if (map->mini_map[i][j] == 'P')
-				mlx_put_image_to_window(map->game->mlx, map->game->window,
-					map->img->img_mini_player, x, y);
-			if (map->mini_map[i][j] == 'C' || map->mini_map[i][j] == 'E')
-				mlx_put_image_to_window(map->game->mlx, map->game->window,
-					map->img->img_mini_player, x, y);
-			j++;
-			x+= 8;
-		}
-		j = 0;
-		y += 8;
-		i++;
-	}
-	
 }
 
 void	ft_create_map_init(t_map *map, int x, int y)

@@ -84,6 +84,5 @@ int	ft_game_malloc_list(t_map *map)
 	map->save = (t_save *)ft_calloc(1, sizeof(t_save));
 	if (!map->save)
 		return (0);
-	memset(map->game, 0, sizeof(t_window_game));
 	return (1);
 }

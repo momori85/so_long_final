@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_struct.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 12:34:53 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/15 22:23:34 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/17 14:38:43 by amblanch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ typedef struct s_game_img
 	void	*save_two;
 	void	*save_tree;
 	void	*save_exit;
+	void	*empty;
+	void	*full;
 }				t_game_img;
 
 typedef struct s_img_wall
@@ -136,8 +138,11 @@ typedef struct s_save
 	char	**save_map;
 	int		len;
 	int		file;
+	int		file_one;
+	int		file_two;
+	int		file_three;
+	int		verif;
 }			t_save;
-
 
 typedef struct s_map
 {
@@ -160,6 +165,7 @@ typedef struct s_map
 	char			*count_path;
 	char			**mini_map;
 	int				fd;
+	int				x;
 	t_verif			*count;
 	t_window_game	*game;
 	t_game_img		*img;

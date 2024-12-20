@@ -6,13 +6,13 @@
 /*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 12:13:13 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/06 12:13:49 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:27:05 by amblanch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_graph.h"
 
-int	ft_see_map_wall_one(t_map *map)
+static int	ft_see_map_wall_one(t_map *map)
 {
 	if (map->map[map->end_y - 1][map->end_x] == '1'
 		&& map->map[map->end_y + 1][map->end_x] == '1'
@@ -38,7 +38,7 @@ int	ft_see_map_wall_one(t_map *map)
 	return (-1);
 }
 
-int	ft_see_map_wall_two(t_map *map)
+static int	ft_see_map_wall_two(t_map *map)
 {
 	if (map->map[map->end_y + 1][map->end_x] == '1'
 		&& map->map[map->end_y][map->end_x + 1] == '1'
@@ -56,7 +56,7 @@ int	ft_see_map_wall_two(t_map *map)
 	return (-1);
 }
 
-int	ft_see_map_wall_tree(t_map *map)
+static int	ft_see_map_wall_three(t_map *map)
 {
 	if (map->map[map->end_y + 1][map->end_x] == '1'
 		&& map->map[map->end_y][map->end_x - 1] == '1'
@@ -80,7 +80,7 @@ int	ft_see_map_wall_tree(t_map *map)
 	return (-1);
 }
 
-int	ft_see_map_wall_four(t_map *map)
+static int	ft_see_map_wall_four(t_map *map)
 {
 	if (map->map[map->end_y][map->end_x + 1] == '1'
 		&& map->map[map->end_y][map->end_x] == '1')
@@ -104,7 +104,7 @@ int	ft_see_map_wall(t_map *map)
 	if (i < 0)
 		i = ft_see_map_wall_two(map);
 	if (i < 0)
-		i = ft_see_map_wall_tree(map);
+		i = ft_see_map_wall_three(map);
 	if (i < 0)
 		i = ft_see_map_wall_four(map);
 	return (i);

@@ -97,26 +97,7 @@ void	ft_game_status_game(int keycode, t_map *map)
 		ft_game_status_game_down(keycode, map);
 		ft_game_status_game_up(keycode, map);
 		ft_game_status_game_left(keycode, map);
-		if (map->start_y == map->bfs->next_y
-			&& map->start_x == map->bfs->next_x && map->count_c <= 0)
-		{
-			if (map->save->file == 1)
-			{
-				map->fd = open("save_one.txt", O_TRUNC , 0644);
-				close(map->fd);
-			}
-			if (map->save->file == 2)
-			{
-				map->fd = open("save_two.txt", O_TRUNC , 0644);
-				close(map->fd);
-			}
-			if (map->save->file == 3)
-			{
-				map->fd = open("save_tree.txt", O_TRUNC , 0644);
-				close(map->fd);
-			}
-			mlx_loop_end(map->game->mlx);
-		}
+		ft_game_status_exit(map);
 		if (keycode == 65307)
 		{
 			map->i = 0;
@@ -128,7 +109,7 @@ void	ft_game_status_game(int keycode, t_map *map)
 			mlx_key_hook(map->game->window, move, map);
 			mlx_hook(map->game->window, 17, 0, ft_close, map);
 			mlx_put_image_to_window(map->game->mlx, map->game->window,
-					map->img->img_save, 0, 0);
+				map->img->img_save, 0, 0);
 		}
 		ft_verif_bot_player(map);
 		ft_print_path(map);

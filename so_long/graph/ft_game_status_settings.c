@@ -6,13 +6,13 @@
 /*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 08:48:15 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/06 08:48:17 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:29:18 by amblanch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_graph.h"
 
-void	ft_game_move_settings_top(t_map *map, int keycode)
+static void	ft_game_move_settings_top(t_map *map, int keycode)
 {
 	if (keycode == 119 && map->i > 1)
 	{
@@ -33,7 +33,7 @@ void	ft_game_move_settings_top(t_map *map, int keycode)
 	}
 }
 
-void	ft_game_move_settings_down(t_map *map, int keycode)
+static void	ft_game_move_settings_down(t_map *map, int keycode)
 {
 	if (keycode == 115 && map->i < 4)
 	{
@@ -54,7 +54,7 @@ void	ft_game_move_settings_down(t_map *map, int keycode)
 	}
 }
 
-void	ft_resize_screen_game(t_map *map, int keycode)
+static void	ft_resize_screen_game(t_map *map, int keycode)
 {
 	if (keycode == 65293 && map->i > 0)
 	{

@@ -12,7 +12,7 @@
 
 #include "ft_graph.h"
 
-static void	ft_game_menu_start_move(t_map *map)
+static void	ft_game_menu_start_move_two(t_map *map)
 {
 	if (map->i == 1)
 	{
@@ -24,10 +24,16 @@ static void	ft_game_menu_start_move(t_map *map)
 		mlx_key_hook(map->game->window, move, map);
 		mlx_hook(map->game->window, 17, 0, ft_close, map);
 		ft_create_map_init(map, 0, 0);
-		mlx_put_image_to_window(map->game->mlx, map->game->window,
-			map->img->fog, map->screen_x / 2 - (32 * 3 + 16),
-			map->screen_y / 2 - (32 * 3 + 16));
+		if (map->save->file == 0)
+			mlx_put_image_to_window(map->game->mlx, map->game->window,
+				map->img->fog, map->screen_x / 2 - (32 * 3 + 16),
+				map->screen_y / 2 - (32 * 3 + 16));
 	}
+}
+
+static void	ft_game_menu_start_move(t_map *map)
+{
+	ft_game_menu_start_move_two(map);
 	if (map->i == 2)
 	{
 		map->game_status = 2;
@@ -52,7 +58,8 @@ static void	ft_game_menu_start(t_map *map, int keycode)
 {
 	if (keycode == 65307)
 		mlx_loop_end(map->game->mlx);
-	if (keycode == 65293 && (map->i == 1 || map->i == 2 || map->i == 3 || map->i == 4))
+	if (keycode == 65293 && (map->i == 1 || map->i == 2
+			|| map->i == 3 || map->i == 4))
 		ft_game_menu_start_move(map);
 	if (keycode == 65293 && map->i == 0)
 		map->i = 1;
@@ -61,31 +68,21 @@ static void	ft_game_menu_start(t_map *map, int keycode)
 static void	ft_game_menu_len(t_map *map, int keycode)
 {
 	if (keycode == 119 && map->i > 1)
-	{
 		map->i--;
-		if (map->i == 1)
-			mlx_put_image_to_window(map->game->mlx, map->game->window,
-				map->img->img_game, 0, 0);
-		if (map->i == 2)
-			mlx_put_image_to_window(map->game->mlx, map->game->window,
-				map->img->img_settings, 0, 0);
-		if (map->i == 3)
-			mlx_put_image_to_window(map->game->mlx, map->game->window,
-				map->img->img_game_save, 0, 0);
-	}
 	if (keycode == 115 && map->i < 4)
-	{
 		map->i++;
-		if (map->i == 2)
-			mlx_put_image_to_window(map->game->mlx, map->game->window,
-				map->img->img_settings, 0, 0);
-		if (map->i == 3)
-			mlx_put_image_to_window(map->game->mlx, map->game->window,
-				map->img->img_game_save, 0, 0);
-		if (map->i == 4)
-			mlx_put_image_to_window(map->game->mlx, map->game->window,
-				map->img->img_left, 0, 0);
-	}
+	if (map->i == 1)
+		mlx_put_image_to_window(map->game->mlx, map->game->window,
+			map->img->img_game, 0, 0);
+	if (map->i == 2)
+		mlx_put_image_to_window(map->game->mlx, map->game->window,
+			map->img->img_settings, 0, 0);
+	if (map->i == 3)
+		mlx_put_image_to_window(map->game->mlx, map->game->window,
+			map->img->img_game_save, 0, 0);
+	if (map->i == 4)
+		mlx_put_image_to_window(map->game->mlx, map->game->window,
+			map->img->img_left, 0, 0);
 }
 
 void	ft_game_menu(t_map *map, int keycode)

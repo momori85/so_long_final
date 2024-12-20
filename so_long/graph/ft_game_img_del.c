@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_game_img_del.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:41:59 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/15 19:21:07 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/18 15:54:42 by amblanch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,18 @@ static void	ft_clear_player(t_map *map)
 	mlx_destroy_image(map->game->mlx, map->img->img_save);
 	mlx_destroy_image(map->game->mlx, map->img->img_save_exit);
 	mlx_destroy_image(map->game->mlx, map->img->img_resume);
+	mlx_destroy_image(map->game->mlx, map->img->empty);
+	mlx_destroy_image(map->game->mlx, map->img->full);
 }
 
 void	ft_clear_graph(t_map *map)
 {
-	ft_del_wall(map);
-	ft_clear_screen(map);
-	ft_clear_player(map);
+	if (map->count->vision != -2)
+	{
+		ft_del_wall(map);
+		ft_clear_screen(map);
+		ft_clear_player(map);
+	}
 	mlx_clear_window(map->game->mlx, map->game->window);
 	mlx_destroy_window(map->game->mlx, map->game->window);
 	mlx_destroy_display(map->game->mlx);

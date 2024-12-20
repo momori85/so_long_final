@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amaury <amaury@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:45:55 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/15 19:28:51 by amaury           ###   ########.fr       */
+/*   Updated: 2024/12/18 13:43:51 by amblanch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "graph/ft_graph.h"
 
 int		ft_verif_map(t_map *map, t_verif *count);
-void	free_map(char **tab, t_map *map);
+void	free_map(char **tab);
 int		ft_init_bfs(t_map *map, t_verif *count, char **tab);
 int		ft_end_buf(t_bfs *buf);
 int		ft_start_buf(t_bfs *buf, int index);
@@ -33,5 +33,9 @@ int		ft_init_bfs(t_map *map, t_verif *count, char **str);
 char	**ft_so_long_map_create(char **tmp, int fd);
 int		ft_close(t_map *map);
 char	**ft_so_long(char *name);
+void	ft_save(t_map *map);
+void	ft_save(t_map *map);
+void	ft_create_mini_map_empty(t_map *map);
+int		ft_verif_len(char **str);
 
 #endif

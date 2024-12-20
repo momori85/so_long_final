@@ -6,7 +6,7 @@
 /*   By: amblanch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 11:23:54 by amblanch          #+#    #+#             */
-/*   Updated: 2024/12/06 11:23:57 by amblanch         ###   ########.fr       */
+/*   Updated: 2024/12/18 10:24:08 by amblanch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	ft_game_create_bot_two(t_map *map)
 	map->map[y][x] = 'B';
 }
 
-static void	ft_game_create_bot_tree(t_map *map)
+static void	ft_game_create_bot_three(t_map *map)
 {
 	int	x;
 	int	y;
@@ -100,5 +100,5 @@ void	ft_game_create_bot(t_map *map)
 	if (ft_verif_bot_map(map) == 1)
 		ft_game_create_bot_two(map);
 	if (ft_verif_bot_map(map) == 1)
-		ft_game_create_bot_tree(map);
+		ft_game_create_bot_three(map);
 }
